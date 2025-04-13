@@ -13,12 +13,13 @@
             margin: 0;
             padding: 20px;
             color: #555;
+            overflow-x: auto; /* Permite scroll horizontal en móviles */
         }
         
         .invitacion {
-            max-width: 600px;
+            max-width: 100%; /* Ocupa todo el ancho en móviles */
             margin: 0 auto;
-            padding: 30px;
+            padding: 20px;
             border-radius: 20px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             background: linear-gradient(135deg, #FFD1DC 0%, #FFECF1 100%);
@@ -28,13 +29,14 @@
         
         h1 {
             color: #FF6B8B;
-            font-size: 2.5em;
+            font-size: clamp(1.8em, 4vw, 2.5em); /* Tamaño adaptable */
             margin-bottom: 10px;
         }
         
         p {
-            font-size: 1.2em;
+            font-size: clamp(1em, 2vw, 1.2em); /* Texto adaptable */
             line-height: 1.6;
+            margin: 10px 0;
         }
         
         .separador {
@@ -50,19 +52,28 @@
             color: #FF6B8B;
         }
         
-        /* Tarjetas de género */
+        /* Contenedor de tarjetas (SIEMPRE EN FILA) */
+        .contenedor-tarjetas {
+            display: flex;
+            flex-direction: row; /* Siempre en horizontal */
+            gap: 10px; /* Espacio entre tarjetas */
+            overflow-x: auto; /* Scroll horizontal en móviles */
+            padding-bottom: 15px; /* Espacio para el scroll */
+            -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+        }
+        
+        /* Tarjetas de género (50% del ancho en desktop, mínimo 280px en móvil) */
         .tarjeta {
-            display: inline-block;
-            width: 45%;
-            margin: 10px;
-            padding: 20px;
+            min-width: 280px; /* Ancho mínimo para móviles */
+            flex: 1; /* Ocupa espacio disponible */
+            padding: 15px;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
         }
         
         .tarjeta:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
         
         .mujer {
@@ -73,27 +84,30 @@
             background: linear-gradient(135deg, #88D8B0 0%, #55C0A1 100%);
         }
         
-        /* Estilos para imágenes */
+        /* Estilos para imágenes (ajustadas para móviles) */
         .imagen-producto {
-            width: 150px;
-            height: 150px;
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            aspect-ratio: 1/1;
             object-fit: cover;
             border-radius: 10px;
             border: 3px solid white;
-            margin-bottom: 15px;
+            margin: 5px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
         /* Botones */
         .boton {
             display: inline-block;
-            padding: 12px 25px;
-            margin: 10px;
+            padding: 10px 20px;
+            margin: 10px 5px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
             color: white;
             transition: all 0.3s;
+            font-size: clamp(0.9em, 2vw, 1em);
         }
         
         .whatsapp {
@@ -127,29 +141,29 @@
         <p class="destacado">"Estilo que habla por ti🤙🏻"</p>
         <p>Descubre cada producto, sé que te encantarán:</p>
         
-        <div>
-            <div class="tarjeta mujer">
-                <h2>Para ti mujer💖</h2>
-                <!-- Imagen para mujer -->
-                <img src="imagenes/ejemploMU.jpg" alt="Prenda femenina" class="imagen-producto">
-                <img src="imagenes/ejemploMU.jpg" alt="Prenda femenina" class="imagen-producto">
-                <img src="imagenes/ejemploMU.jpg" alt="Prenda femenina" class="imagen-producto">
-
-
-                <p>Eres linda pero con estas prendas serás el doble🥰</p>
-                <a href="https://wa.me/3114857008?text=¡Hola!%20Quiero%20comprar%20productos%20para%20mujer%20en%20Sheiclo" class="boton whatsapp">WhatsApp</a>
-            </div>
-            
+        <div class="contenedor-tarjetas">
+            <!-- HOMBRE (IZQUIERDA) -->
             <div class="tarjeta hombre">
                 <h2>Para ti hombre 💚</h2>
-                <!-- Imagen para hombre -->
-                <img src="imagenes/ejemploHD.jpg" alt="Prenda masculina" class="imagen-producto">
-                <img src="imagenes/ejemploHD.jpg" alt="Prenda masculina" class="imagen-producto">
-                <img src="imagenes/ejemploHD.jpg" alt="Prenda masculina" class="imagen-producto">
-
-
+                <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+                    <img src="imagenes/ejemploHD.jpg" alt="Prenda masculina" class="imagen-producto">
+                    <img src="imagenes/ejemploHD.jpg" alt="Prenda masculina" class="imagen-producto">
+                    <img src="imagenes/ejemploHD.jpg" alt="Prenda masculina" class="imagen-producto">
+                </div>
                 <p>Aqui sabrás lo que es ser facha😉</p>
                 <a href="https://wa.me/3114857008?text=¡Hola!%20Quiero%20comprar%20productos%20para%20hombre%20en%20Sheiclo" class="boton whatsapp">WhatsApp</a>
+            </div>
+            
+            <!-- MUJER (DERECHA) -->
+            <div class="tarjeta mujer">
+                <h2>Para ti mujer💖</h2>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+                    <img src="imagenes/ejemploMU.jpg" alt="Prenda femenina" class="imagen-producto">
+                    <img src="imagenes/ejemploMU.jpg" alt="Prenda femenina" class="imagen-producto">
+                    <img src="imagenes/ejemploMU.jpg" alt="Prenda femenina" class="imagen-producto">
+                </div>
+                <p>Eres linda pero con estas prendas serás el doble🥰</p>
+                <a href="https://wa.me/3114857008?text=¡Hola!%20Quiero%20comprar%20productos%20para%20mujer%20en%20Sheiclo" class="boton whatsapp">WhatsApp</a>
             </div>
         </div>
         
